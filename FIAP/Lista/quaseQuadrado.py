@@ -1,11 +1,30 @@
-""" 
-https://t.ly/L28o1
+import math
 
-Calculadora:
+def perto_quad_perfeito(n):
+    if n < 0:
+        return False
+    
+    # Calcula a raiz quadrada e arredonda para baixo
+    raiz = math.sqrt(n)
+    raiz_int = int(raiz)  # Arredonda para baixo
+    
+    # Verifica se é um quadrado perfeito
+    if raiz_int ** 2 == n:
+        return True
+    
+    # Verifica se está a uma unidade de distância de um quadrado perfeito
+    if (raiz_int ** 2 == n - 1) or ((raiz_int + 1) ** 2 == n + 1):
+        return True
+    
+    return False
 
-Escreva em python uma função calculadora. 
-Ela recebe 3 argumentos, 2 numeros e uma string.
-A string pode ser '+', '*', '-' ou '/'.
-De acordo com a string, ela faz a operação correta e retorna o resultado
-
-"""
+# Testes
+print(perto_quad_perfeito(25))  # True  
+print(perto_quad_perfeito(24))  # True  
+print(perto_quad_perfeito(26))  # True  
+print(perto_quad_perfeito(36))  # True  
+print(perto_quad_perfeito(23))  # False 
+print(perto_quad_perfeito(16))  # True
+print(perto_quad_perfeito(17))  # True  
+print(perto_quad_perfeito(15))  # True  
+print(perto_quad_perfeito(14))  # False

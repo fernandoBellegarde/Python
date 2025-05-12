@@ -29,4 +29,4 @@ y = float(input("Digite o segundo número: "))
 oper = input("Digite o operador (+, -, *, /): ")
 
 resultado = calculadora(x, y, oper)
-print(f"O resultado de {x} {oper} {y} é: {resultado}")
+print(f"O resultado de {x} {oper} {y} é: {resultado:.2f}")
