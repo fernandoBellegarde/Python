@@ -16,10 +16,32 @@ def cadastrarUsuario():
     print(f"Usuário {nome} cadastrado com sucesso!")
 
 
+    while True:     
+        resp = input('Cadastrar outro usuario s/n ').lower()
+        if resp == 's':
+            cadastrarUsuario()
+            break
+        elif resp == 'n':
+            menu()
+            break
+        else:
+            print('Digite apenas sim ou nao')
+
 def visualizarUsuarios():
     print("Usuários cadastrados até agora:")
     for usuario in usuarios_cadastrados:
         print(f"Nome: {usuario['nome']}, Endereço: {usuario['endereco']}, Telefone: {usuario['telefone']}, id: {usuario['id']}")
+    
+    while True:     
+        resp = input('Cadastrar outro usuario s/n ').lower()
+        if resp == 's':
+            cadastrarUsuario()
+            break
+        elif resp == 'n':
+            menu()
+            break
+        else:
+            print('Digite apenas sim ou nao')
     
 def menu():
 
