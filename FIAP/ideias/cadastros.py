@@ -3,6 +3,27 @@ import uuid
 usuarios_cadastrados = []
 sensores_cadastrados = []
 
+def gestaoUsuarios():
+    while True:        
+        print("\nOpção 1: Cadastrar usuário")
+        print("Opção 2: Visualizar usuários")
+        print("Opção 3: Remover usuários")
+
+        resp = input('Digite sua opção: ')
+
+        if resp == '1':
+            cadastrarUsuario()
+            break
+        elif resp == '2':
+            visualizarUsuarios()
+            break
+        elif resp == '3': 
+            removerUsuario()
+            break
+        else:
+            print('Digite apenas o número das opções.')
+
+
 def cadastrarUsuario():
     nome = input('\nDigite seu nome: ')
     endereco = input('Digite seu endereço: ')
@@ -43,6 +64,39 @@ def visualizarUsuarios():
             break
         else:
             print('Digite apenas sim ou nao')
+
+def removerUsuario():
+    if not usuarios_cadastrados:
+        print("\nNão há usuários cadastrados para remover.")
+        menu()
+        return
+
+    nome = input('\nDigite o nome do usuário para ser deletado: ')
+    endereco = input('Digite o endereço do usuário para ser deletado: ')
+    
+    usuario_encontrado = None
+    
+    for usuario in usuarios_cadastrados:
+        if usuario['nome'].lower() == nome.lower() and usuario['endereco'].lower() == endereco.lower():
+            usuario_encontrado = usuario
+            break
+
+    if usuario_encontrado:
+        usuarios_cadastrados.remove(usuario_encontrado)
+        print(f"\nUsuário '{nome}' removido com sucesso!")
+    else:
+        print("\nUsuário não encontrado com os dados informados.")
+
+    while True:
+        resp = input("\nDeseja remover outro usuário (s) ou voltar ao menu (m)? ").lower()
+        if resp == 's':
+            removerUsuario()
+            break
+        elif resp == 'm':
+            menu()
+            break
+        else:
+            print("Digite apenas 's' ou 'm'.")
 
 def gestaoDeSensores():
 
@@ -153,26 +207,26 @@ def visualizarSensores():
 
 
 def menu():
-
     while True:    
         print('\nHydroAlert')
-        print('Opção 1: Cadastrar usuarios')
-        print('Opção 2: Verificar usuários')
-        print('Opção 3: Gestão de sensores')
+        print('Opção 1: Gestão de usuários')
+        print('Opção 2: Gestão de sensores')
+        print('Opção 3: Sair')
 
         opicao = input('\nDigite a sua opção: ')
 
         if opicao == '1':
-            cadastrarUsuario()
+            gestaoUsuarios()
             break
         elif opicao == '2':
-            visualizarUsuarios()
-            break
-        elif opicao == '3':
             gestaoDeSensores()
             break
-        elif opicao == '4':
-            return
+        elif opicao == '3':
+            print("Encerrando o sistema. Até logo!")
+            break
+        else:
+            print("Digite uma opção válida.")
+
     
     
 menu()
