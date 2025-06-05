@@ -227,6 +227,4 @@ def menu():
         else:
             print("Digite uma opção válida.")
 
-    
-    
 menu()
