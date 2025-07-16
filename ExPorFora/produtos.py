@@ -24,9 +24,8 @@ def menu():
                 ver_produtos()
                 break
             case '4':
-                print('Programaca encerrado')
-                terminar_programa()
-                break
+                print('Programa encerrado')
+                exit()
             case _:
                 print('Opcao invalida')
 
@@ -79,22 +78,21 @@ def remover_produto():
     
 def ver_produtos():
     print('\n---VER PRODUTOS---')
-    for i, p in enumerate(produtos, start=1):
-        print(f"{i}. {p['nome']} - Quantidade: {p['quantidade']} - Valor: R${p['valor']:.2f}\n")
-        print('Voltar para o menu? (s)')
 
-    opcao = input().lower()
+    if not produtos:
+        print("Nenhum produto cadastrado.\n")
+        menu()
+        return
+
+    for i, p in enumerate(produtos, start=1):
+        print(f"{i}. {p['nome']} - Quantidade: {p['quantidade']} - Valor: R${p['valor']:.2f}")
 
     while True:
-         match opcao:
-            case 's':
-                menu()                  
-                break
-            case _:
-                print('Opcao invalida, digite novamente')
-
-
-def terminar_programa():
-    return
+        opcao = input('\nVoltar para o menu? (s): ').lower()
+        if opcao == 's':
+            menu()
+            break
+        else:
+            print('Opcao invalida, digite novamente.')
 
 main()
