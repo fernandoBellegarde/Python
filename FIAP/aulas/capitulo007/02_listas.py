@@ -51,7 +51,14 @@ Dica: para juntar duas strings, faça nova='a'+'b'
 Dica: para transformar um numero n em string, faça str(n)
 '''
 def cria_naipe(naipe):
-    pass #implemente aqui a funcao
+    baralho = ["A", "2", "3", '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
+    lista = []
+ 
+    for naip in baralho:
+        soma  = naip + naipe
+        lista.append(soma)
+ 
+    return lista
 
 #faça uma função que cria um baralho completo, com todas as 52 cartas
 #ela nao recebe nada e retorna uma lista.
