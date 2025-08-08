@@ -1,4 +1,3 @@
-
 '''
 faça uma função que recebe uma lista de números e retorna a
 soma de todos eles. NÃO utilize a função sum do python. Implemente a
@@ -7,7 +6,7 @@ lógica você mesmo!
 def soma(lista):
     count = 0
     for i in lista:
-        count = count+i
+        count =+i
 
     return count
 
@@ -163,7 +162,7 @@ def runTests():
 
 try:
     from listas_gabarito import *
-    runTests();
+    runTests()
 except:
     pass
 
