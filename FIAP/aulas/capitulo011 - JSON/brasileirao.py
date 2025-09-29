@@ -40,7 +40,7 @@ lendo o arquivo json pra voce
 def pega_dados():
     with open('ano2018.json') as f:
         dados = json.load(f)
-    return print(dados)
+    return dados
 '''
 não dá muito certo imprimir todos os dados, porque o python 
 dá pau ao imprimir uma quantidade tao grande de informações, 
@@ -165,7 +165,9 @@ A funcao so recebe o dicionario de dados do brasileirao
 
 '''
 def classificados_libertadores(dados):
-    pass
+    numero_de_times = qtos_libertadores(dados)
+    lista_classificados = ids_dos_melhor_classificados(dados, numero_de_times)
+    return lista_classificados
 
 
 '''
@@ -173,7 +175,12 @@ Usando as duas funcoes anteriores, podemos fazer uma que retorna os nomes dos cl
 '''
 
 def nomes_classificados_libertadores(dados):
-    pass
+    ids_classificados = classificados_libertadores(dados)
+    nomes_classificados = []
+    for id in ids_classificados:
+        nome = nome_do_time(dados, id)
+        nomes_classificados.append(nome)
+    return nomes_classificados
 
 '''
 Nos nossos dados, cada time tem um id, uma identificacao numerica.
@@ -196,9 +203,9 @@ def ids_dos_times_de_um_jogo(dados,id_jogo):
     return time1,time2 #assim a gente retorna as duas respostas em um unico return
 '''
 def ids_dos_times_de_um_jogo(dados,id_jogo):
-    time1 = 12
-    time2 = 13
-    return time1,time2 #assim a gente retorna as duas respostas em um unico return
+    time1 = dados['fases']['2700']['jogos']['id'][id_jogo]['time1_id']
+    time2 = dados['fases']['2700']['jogos']['id'][id_jogo]['time2_id']
+    return time1, time2
 
 '''
 A proxima funcao "cruza" a anterior com a funcao que pega nomes. 
@@ -210,7 +217,10 @@ somente fazer os meus testes. Para isso, note que muitos numeros
 nesse arquivo estao representados nao como números, mas como strings)
 '''
 def nomes_dos_times_de_um_jogo(dados,id_jogo):
-   pass
+    id_time1, id_time2 = ids_dos_times_de_um_jogo(dados, id_jogo)
+    nome_time1 = nome_do_time(dados, id_time1)
+    nome_time2 = nome_do_time(dados, id_time2)
+    return nome_time1, nome_time2
 
 '''
 Façamos agora a busca "ao contrário". Conhecendo
