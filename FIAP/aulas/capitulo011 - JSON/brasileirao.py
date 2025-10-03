@@ -203,9 +203,9 @@ def ids_dos_times_de_um_jogo(dados,id_jogo):
     return time1,time2 #assim a gente retorna as duas respostas em um unico return
 '''
 def ids_dos_times_de_um_jogo(dados,id_jogo):
-    time1 = dados['fases']['2700']['jogos']['id'][id_jogo]['time1_id']
-    time2 = dados['fases']['2700']['jogos']['id'][id_jogo]['time2_id']
-    return time1, time2
+    id_time1 = dados['fases']['2700']['jogos']['id'][id_jogo]['time1']
+    id_time2 = dados['fases']['2700']['jogos']['id'][id_jogo]['time2']
+    return (id_time1, id_time2)
 
 '''
 A proxima funcao "cruza" a anterior com a funcao que pega nomes. 
@@ -217,10 +217,8 @@ somente fazer os meus testes. Para isso, note que muitos numeros
 nesse arquivo estao representados nao como números, mas como strings)
 '''
 def nomes_dos_times_de_um_jogo(dados,id_jogo):
-    id_time1, id_time2 = ids_dos_times_de_um_jogo(dados, id_jogo)
-    nome_time1 = nome_do_time(dados, id_time1)
-    nome_time2 = nome_do_time(dados, id_time2)
-    return nome_time1, nome_time2
+    (id_time1, id_time2) = ids_dos_times_de_um_jogo(dados, id_jogo)
+    return (nome_do_time(dados,id_time1), nome_do_time(dados,id_time2))
 
 '''
 Façamos agora a busca "ao contrário". Conhecendo
@@ -229,7 +227,10 @@ o nome-comum de um time, queremos saber sua id.
 Se o nome comum nao existir, retorne 'nao encontrado'
 '''
 def id_do_time(dados,nome_time):
-    pass
+    for id, info in dados['equipes'].items():
+        if info['nome-comum'] == nome_time:
+            return id
+    return 'nao encontrado'
 
 
 '''
@@ -242,7 +243,8 @@ dica: busque em dados['fases']
 
 '''
 def datas_de_jogo(dados):
-    pass
+    datas = list(dados['fases']['2700']['jogos']['data'].keys())
+    return datas
 
 '''
 Crie uma funcao data_de_um_jogo, que recebe a id numérica de um jogo
@@ -254,7 +256,10 @@ vai falhar
 
 '''
 def data_de_um_jogo(dados,id_jogo):
-    pass
+    if id_jogo in dados['fases']['2700']['jogos']['id']:
+        data = dados['fases']['2700']['jogos']['id'][id_jogo]['data']
+        return data
+    
 
 
 '''
