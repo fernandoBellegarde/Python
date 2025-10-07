@@ -259,6 +259,8 @@ def data_de_um_jogo(dados,id_jogo):
     if id_jogo in dados['fases']['2700']['jogos']['id']:
         data = dados['fases']['2700']['jogos']['id'][id_jogo]['data']
         return data
+    else: 
+        return 'nao encontrado'
     
 
 
@@ -272,9 +274,15 @@ Ou seja, as chaves sao ids de estádios e os valores associados,
 o número de vezes que um jogo ocorreu no estádio
 '''
 def dicionario_id_estadio_e_nro_jogos(dados):
-    pass
-
-
+    estadio_count = {}
+    for jogo in dados['fases']['2700']['jogos']['id'].values():
+        estadio_id = jogo['estadio_id']
+        if estadio_id in estadio_count:
+            estadio_count[estadio_id] += 1
+        else:
+            estadio_count[estadio_id] = 1
+    return estadio_count
+    
 
 '''
 Agora, façamos uma busca "fuzzy". Queremos procurar por 'Fla'
@@ -291,7 +299,15 @@ com a pesquisa (e pode ser vazia, se não achar ninguém)
 '''
 
 def busca_imprecisa_por_nome_de_time(dados,nome_time):
-    pass
+    ids_encontrados = []
+    nome_time = nome_time.lower()
+    for id, info in dados['equipes'].items():
+        if (nome_time in info['nome-comum'].lower() or
+            nome_time in info['nome-slug'].lower() or
+            nome_time in info['sigla'].lower() or
+            nome_time in info['nome'].lower()):
+            ids_encontrados.append(id)
+    return ids_encontrados
 
 #ids dos jogos de um time
 
